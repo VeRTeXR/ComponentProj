@@ -22,7 +22,7 @@ public class Account {
     }
    
     public Boolean setIsAdmin(Boolean isAdmin)  {
-        this.isAdmin = isAdmin;
+        return this.isAdmin = isAdmin;
     }
 
     public String getUsername() {

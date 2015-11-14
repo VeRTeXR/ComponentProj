@@ -17,7 +17,7 @@
         private DatabaseDriver dbDriver = null;
         public void jspInit() {
             String derbyClientDriver = "org.apache.derby.jdbc.ClientDriver";
-            String url = "jdbc:derby://localhost:1527/accounts";
+            String url = "jdbc:derby://localhost:1527/Component_db";
             String user = "root";
             String passwd = "root";
             

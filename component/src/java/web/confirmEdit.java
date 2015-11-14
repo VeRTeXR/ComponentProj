@@ -7,25 +7,23 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Report;
+import javax.servlet.http.HttpSession;
 import utilities.DatabaseDriver;
 import utilities.DatabaseHandler;
-import static web.report_servlet.count;
-import model.Account;
-import model.Student;
 
 /**
  *
- * @author VeRTeXR
+ * @author KOKOKRUNCH
  */
-public class permission extends HttpServlet {
+public class confirmEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,31 +37,7 @@ public class permission extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
-         DatabaseDriver dbDriver = (DatabaseDriver) this.getServletContext().getAttribute("dbDriver");
-         DatabaseHandler dbHandler = null;
-          try {
-            dbHandler = new DatabaseHandler(dbDriver);
-            Account mem = new Account();
-            mem.setUsername(request.getParameter("username"));
-            mem.setPassword(request.getParameter("password"));
-            String sql = "select * from ACCOUNT where ID = "+mem.getUsername()+" and PASSWORD = "+"'"+mem.getPassword()+"'";
-            ResultSet rs = dbHandler.query(sql);
-            rs.next();
-               if(rs.getBoolean("is_admin")){
-                    request.getRequestDispatcher("adminpage.jsp").forward(request, response);
-                }
-                else {
-                    request.getRequestDispatcher("show_infomation.jsp").forward(request, response);
-                }
-            
-            dbHandler.closeDatabase();
-            this.getServletContext().setAttribute("stdid", request.getParameter("username"));
-            
-      
-        } catch (ClassNotFoundException ex) {
-        } catch (SQLException ex) {
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

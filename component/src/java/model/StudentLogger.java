@@ -42,6 +42,14 @@ public class StudentLogger {
         stdList = extractStudent(rs);
         return stdList;
     }
+    public static ArrayList<Student> findStudent(DatabaseHandler dbHandler,int id) throws SQLException {
+        String sql = "select * from student where id ="+id;
+        ResultSet rs; 
+        ArrayList<Student> stdList = null;
+        rs = dbHandler.query(sql);
+        stdList = extractStudent(rs);
+        return stdList;
+    }
     private static ArrayList<Report> extractReport(ResultSet rs) {
         ArrayList<Report> stdList = new ArrayList<>();
         try {
@@ -89,4 +97,5 @@ public class StudentLogger {
         }
         return stdList;
     }
+    
 }

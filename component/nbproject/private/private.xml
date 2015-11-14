@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/KOKOKRUNCH/Documents/NetBeansProjects/component/web/index.jsp</file>
+            <file>file:/C:/Users/KOKOKRUNCH/Documents/ComponentProj/component/src/java/model/Account.java</file>
+            <file>file:/C:/Users/KOKOKRUNCH/Documents/ComponentProj/component/web/index.jsp</file>
+            <file>file:/C:/Users/KOKOKRUNCH/Documents/ComponentProj/component/src/java/web/permission.java</file>
+            <file>file:/C:/Users/KOKOKRUNCH/Documents/ComponentProj/component/web/show_infomation.jsp</file>
+            <file>file:/C:/Users/KOKOKRUNCH/Documents/ComponentProj/component/src/java/web/report_servlet.java</file>
         </group>
     </open-files>
 </project-private>

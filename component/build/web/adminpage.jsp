@@ -3,6 +3,7 @@
     Created on : Nov 14, 2015, 5:11:51 PM
     Author     : KOKOKRUNCH
 --%>
+<%@page import="model.StudentLogger"%>
 <%@page import="model.Report"%>
 <%@page import="model.Student"%>
 <%@page import="java.util.ArrayList"%>
@@ -20,14 +21,14 @@
    
     <%
             DatabaseDriver dbDriver = (DatabaseDriver)this.getServletContext().getAttribute("dbDriver");
-            /*DatabaseHandler dbHandler = (DatabaseHandler) session.getAttribute("dbHandler");
+            DatabaseHandler dbHandler = (DatabaseHandler) session.getAttribute("dbHandler");
             if (dbHandler == null) {
                 dbHandler = new DatabaseHandler(dbDriver);
                 session.setAttribute("dbHandler", dbHandler);
-            }*/
+            }
             //DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
-            //ArrayList<Report> empList = Student.getAllReport(dbHandler);
-            //Iterator<Report> itr = empList.iterator();
+            ArrayList<Report> empList = StudentLogger.getAllReport(dbHandler);
+            Iterator<Report> itr = empList.iterator();
      %>
     <body>
         out.print("hello");
@@ -43,6 +44,10 @@
             <br><br>
             <input type="submit" name="createsubmit" value="Create" />
         </form>
+        <form name="edit" action="editMember.jsp" method="POST">
+            <input type="text" name="id" value="" /><br>
+            <input type="submit" value="submit" name="submit" />
+        </form>
         <br><br><br>
         <h1>List Request</h1>
         <table border="1">
@@ -51,13 +56,13 @@
                 <th>Report</th>                
             </tr>
         <%
-            //while(itr.hasNext()){
-              //  re = itr.next();
+            while(itr.hasNext()){
+                re = itr.next();
                 out.println("<tr>");
                 out.println("<td>"+re.getStdid()+"</td>");
                 out.println("<td><a href='editMember.jsp?id="+re.getStdid()+"'>"+re.getReport()+"</a></td>");               
                 out.println("</tr>");                
-            //}
+            }
         %>
         </table>
     </body>

@@ -15,6 +15,15 @@ public class Account {
    
     private String username;
     private String password;
+    private Boolean isAdmin;
+    
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+   
+    public Boolean setIsAdmin(Boolean isAdmin)  {
+        this.isAdmin = isAdmin;
+    }
 
     public String getUsername() {
         return username;

@@ -50,11 +50,11 @@ public class StdRegis {
         //create statement
         Statement stmt = con.createStatement();
        // insertData(stmt, 1, "John", 12345);     //add data here or wot 
-            
         //insertData(stmt, 1, "Marry", "address", "faculty");
        // deleteDataById(stmt, 1);
-        //updateAddressById(stmt, 3, 5000.50);
-        updateFacultyById(con, 1, "ddd");
+        //updateAddressById(stmt, 1, "dug");
+        updateFacultyById(stmt, 1, "ddd");
+        //updateNameById(stmt, 1 ,"name");
         //simpleQuery(stmt);
         //simpleQueryObject(stmt);
         //close connection
@@ -115,23 +115,28 @@ public class StdRegis {
     }
 
     public static void updateAddressById(Statement stmt, int id, String address) throws SQLException {
-        String sql = "update student set address  = " + address
+        String sql = "update student set address  = " + "'" +address+"'"
                 + " where id = " + id;
         int result = stmt.executeUpdate(sql);
         //display result
         System.out.println("update " + result + " row");
     }
     
-    public static void updateFacultyById(Connection con, int id, String faculty) throws SQLException {
-        String sql = "update student set faculty = ? where id = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, faculty);
-        ps.setInt(2, id);
-        int result = ps.executeUpdate(sql);
+    public static void updateFacultyById(Statement stmt, int id, String faculty) throws SQLException {
+        String sql = "update student set faculty = "+"'"+faculty+"'"+" where id = "+id;
+        int result = stmt.executeUpdate(sql);
         //display resul
         System.out.println("update " + result + " row");
     }
 
+    public static void updateNameById(Statement stmt, int id, String name) throws SQLException {
+        String sql = "update student set name  = " + "'" +name+"'"
+                + " where id = " + id;
+        int result = stmt.executeUpdate(sql);
+        //display result
+        System.out.println("update " + result + " row");
+    }
+    
     public static void deleteDataPreparedStatementById(Connection con, int id) throws SQLException {
         String sql = "delete from student where id = ?";
         PreparedStatement ps = con.prepareStatement(sql);

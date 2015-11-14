@@ -47,17 +47,15 @@ public class permission extends HttpServlet {
             Account mem = new Account();
             mem.setUsername(request.getParameter("username"));
             mem.setPassword(request.getParameter("password"));
-            String sql = "select * from ACCOUNT where ID = "+mem.getUsername()+" and PAASSWORD = "+mem.getPassword();
-            ResultSet rs; 
-            ArrayList<Account> act = null;
-            rs = dbHandler.query(sql);
-            boolean admin = true ;
-            while(rs.next())
-            {
-                 admin = rs.getBoolean("is_admin");if(admin)
+            String sql = "select * from ACCOUNT where ID = "+mem.getUsername()+" and PASSWORD = "+"'"+mem.getPassword()+"'";
+            ResultSet rs = dbHandler.query(sql);
+            while(rs.next()){
+               if(rs.getBoolean("is_admin")){
                 request.getRequestDispatcher("adminpage.jsp").forward(request, response);
-           else
+            }
+            else {
                 request.getRequestDispatcher("show_infomation.jsp").forward(request, response);
+                    }
             }
             dbHandler.closeDatabase();
             this.getServletContext().setAttribute("stdid", request.getParameter("username"));

@@ -25,11 +25,12 @@
                 dbHandler = new DatabaseHandler(dbDriver);
                 session.setAttribute("dbHandler", dbHandler);
             }*/
-            DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
-            ArrayList<Report> empList = Student.getAllReport(dbHandler);
-            Iterator<Report> itr = empList.iterator();
+            //DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
+            //ArrayList<Report> empList = Student.getAllReport(dbHandler);
+            //Iterator<Report> itr = empList.iterator();
      %>
     <body>
+        out.print("hello");
         <h1>Create Member</h1>
         <form name="createMember" action="" method="POST">
             ID : <input type="text" name="createID" value="" size="10" />
@@ -50,13 +51,13 @@
                 <th>Report</th>                
             </tr>
         <%
-            while(itr.hasNext()){
-                re = itr.next();
+            //while(itr.hasNext()){
+              //  re = itr.next();
                 out.println("<tr>");
                 out.println("<td>"+re.getStdid()+"</td>");
                 out.println("<td><a href='editMember.jsp?id="+re.getStdid()+"'>"+re.getReport()+"</a></td>");               
                 out.println("</tr>");                
-            }
+            //}
         %>
         </table>
     </body>

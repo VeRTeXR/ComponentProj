@@ -44,7 +44,6 @@
       } 
     %>
     <body>
-        <h1>Hello World!</h1>
         <form name="student" action="permission" method="POST">
             <input type="text" name="username" value="" /><br>
             <input type="password" name="password" value="" /><br>

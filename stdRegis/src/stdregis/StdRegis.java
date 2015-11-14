@@ -5,7 +5,6 @@
  */
 package stdregis;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -28,7 +27,7 @@ public class StdRegis {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-      String derbyClientDriver = "org.apache.derby.jdbc.ClientDriver";
+        String derbyClientDriver = "org.apache.derby.jdbc.ClientDriver";
         //String mySqlDriver = "com.mysql.jdbc.Driver";
         //load driver
         Class.forName(derbyClientDriver);
@@ -51,106 +50,112 @@ public class StdRegis {
         //create statement
         Statement stmt = con.createStatement();
        // insertData(stmt, 1, "John", 12345);     //add data here or wot 
-      
         //insertData(stmt, 1, "Marry", "address", "faculty");
-        //deleteDataById(stmt, 6);
-        //updateSalaryById(stmt, 3, 5000.50);
-        //insertDataPreparedStatement(con, 3, "Markus", 14578);
-        //deleteDataPreparedStatementById(con, 5);
-        //updateSalaryPreparedStatementById(con, 3, 6000.50);
-        simpleQuery(stmt);
+       // deleteDataById(stmt, 1);
+        //updateAddressById(stmt, 1, "dug");
+        updateFacultyById(stmt, 1, "ddd");
+        //updateNameById(stmt, 1 ,"name");
+        //simpleQuery(stmt);
         //simpleQueryObject(stmt);
         //close connection
         stmt.close();
         con.close();
-    
+
     }
-    
-     public static void simpleQueryObject(Statement stmt) throws SQLException {
-       String sql = "select * from student order by id";
-       ArrayList<Student> stdList = new ArrayList<>();
-       ResultSet rs = stmt.executeQuery(sql);
-       while(rs.next()) {
-           Student std = new Student();
-           std.setID(rs.getInt("id"));
-           std.setName(rs.getString("name"));
-           std.setAddress(rs.getString("address")); // change to address
-           std.setFaculty(rs.getString("faculty"));
-           stdList.add(std);
-       }
-       rs.close();
-       for(Student std : stdList) {
-           System.out.print(std.getID() + " ");
-           System.out.print(std.getName() + " ");
-           System.out.println(std.getAddress() + " ");
-           System.out.println(std.getFaculty()+ " ");
-       }
+
+    public static void simpleQueryObject(Statement stmt) throws SQLException {
+        String sql = "select * from student order by id";
+        ArrayList<Student> stdList = new ArrayList<>();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            Student std = new Student();
+            std.setID(rs.getInt("id"));
+            std.setName(rs.getString("name"));
+            std.setAddress(rs.getString("address")); // change to address
+            std.setFaculty(rs.getString("faculty"));
+            stdList.add(std);
+        }
+        rs.close();
+        for (Student std : stdList) {
+            System.out.print(std.getID() + " ");
+            System.out.print(std.getName() + " ");
+            System.out.println(std.getAddress() + " ");
+            System.out.println(std.getFaculty() + " ");
+        }
     }
+
     public static void simpleQuery(Statement stmt) throws SQLException {
-       String sql = "select * from student order by id";
-       ResultSet rs = stmt.executeQuery(sql);
-       while(rs.next()) {
-           System.out.print(rs.getInt("id") + " ");
-           System.out.print(rs.getString("name") + " ");
-           System.out.println(rs.getString("address")+" ");
-           System.out.println(rs.getString("faculty")+" ");
-       }
-       rs.close();
-   }
-   public static void insertData(Statement stmt, int id, String name, 
-           String address, String faculty) throws SQLException {
-       /*String sql = "insert into employee (id, name, salary)" +
-                     " values (5, 'Mark', 12345)";*/
-        String sql = "insert into student (id, name, address, faculty)" +
-                     " values (" + id + "," + "'" + name + "'" + "," + "'" + address + "'" + "," + "'" + faculty + "'" + ")";
+        String sql = "select * from student order by id";
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            System.out.print(rs.getInt("id") + " ");
+            System.out.print(rs.getString("name") + " ");
+            System.out.println(rs.getString("address") + " ");
+            System.out.println(rs.getString("faculty") + " ");
+        }
+        rs.close();
+    }
+
+    public static void insertData(Statement stmt, int id, String name,
+            String address, String faculty) throws SQLException {
+        /*String sql = "insert into employee (id, name, salary)" +
+         " values (5, 'Mark', 12345)";*/
+        String sql = "insert into student (id, name, address, faculty)"
+                + " values (" + id + "," + "'" + name + "'" + "," + "'" + address + "'" + "," + "'" + faculty + "'" + ")";
         int result = stmt.executeUpdate(sql);
         //display result
         System.out.println("Insert " + result + " row");
-   } 
-   public static void deleteDataById(Statement stmt, int id) throws SQLException {
-       String sql = "delete from student where id = " + id;
-       int result = stmt.executeUpdate(sql);
+    }
+
+    public static void deleteDataById(Statement stmt, int id) throws SQLException {
+        String sql = "delete from student where id = " + id;
+        int result = stmt.executeUpdate(sql);
         //display result
         System.out.println("delete " + result + " row");
-   }
-   public static void updateSalaryById(Statement stmt, int id, double salary) throws SQLException {
-       String sql = "update employee set salary  = " + salary + 
-               " where id = " + id;
-       int result = stmt.executeUpdate(sql);
+    }
+
+    public static void updateAddressById(Statement stmt, int id, String address) throws SQLException {
+        String sql = "update student set address  = " + "'" +address+"'"
+                + " where id = " + id;
+        int result = stmt.executeUpdate(sql);
         //display result
         System.out.println("update " + result + " row");
-   }
-   public static void insertDataPreparedStatement(Connection con, int id, 
-           String name, double salary) throws SQLException {
-       String sql = "insert into employee (id, name, salary)" + 
-               " values (?,?,?)";
-       PreparedStatement ps = con.prepareStatement(sql);
-       ps.setInt(1, id);
-       ps.setString(2, name);
-       ps.setDouble(3, salary);
-       int result = ps.executeUpdate();
+    }
+    
+    public static void updateFacultyById(Statement stmt, int id, String faculty) throws SQLException {
+        String sql = "update student set faculty = "+"'"+faculty+"'"+" where id = "+id;
+        int result = stmt.executeUpdate(sql);
+        //display resul
+        System.out.println("update " + result + " row");
+    }
+
+    public static void updateNameById(Statement stmt, int id, String name) throws SQLException {
+        String sql = "update student set name  = " + "'" +name+"'"
+                + " where id = " + id;
+        int result = stmt.executeUpdate(sql);
         //display result
-        System.out.println("Insert " + result + " row");
-   }
-   public static void deleteDataPreparedStatementById(Connection con, int id) throws SQLException {
-       String sql ="delete from employee where id = ?";
-       PreparedStatement ps = con.prepareStatement(sql);
-       ps.setInt(1, id);
-       int result = ps.executeUpdate();
+        System.out.println("update " + result + " row");
+    }
+    
+    public static void deleteDataPreparedStatementById(Connection con, int id) throws SQLException {
+        String sql = "delete from student where id = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        int result = ps.executeUpdate();
         //display result
         System.out.println("Delete " + result + " row");
-   }
-   public static void updateSalaryPreparedStatementById(Connection con, 
-           int id, double salary) throws SQLException {
-       String sql = "update employee set salary  = ? where id = ? ";
-       PreparedStatement ps = con.prepareStatement(sql);
-       ps.setDouble(1, salary);
-       ps.setInt(2, id);
-       int result = ps.executeUpdate();
+    }
+
+    public static void updateSalaryPreparedStatementById(Connection con,
+            int id, double salary) throws SQLException {
+        String sql = "update employee set salary  = ? where id = ? ";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setDouble(1, salary);
+        ps.setInt(2, id);
+        int result = ps.executeUpdate();
         //display result
         System.out.println("update " + result + " row");
-   }
-
+    }
 
     public static void persist(Object object) { //adding teh static bruhh
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("stdRegisPU");

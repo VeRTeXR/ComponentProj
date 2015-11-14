@@ -49,15 +49,13 @@ public class StdRegis {
         Connection con = DriverManager.getConnection(url, user, passwd);
         //create statement
         Statement stmt = con.createStatement();
-       // insertData(stmt, 1, "John", 12345);     //add data here or wot 
-        //insertData(stmt, 1, "Marry", "address", "faculty");
-       // deleteDataById(stmt, 1);
-        //updateAddressById(stmt, 1, "dug");
-        updateFacultyById(stmt, 1, "ddd");
-        //updateNameById(stmt, 1 ,"name");
-        //simpleQuery(stmt);
-        //simpleQueryObject(stmt);
-        //close connection
+        //insertData(stmt, 1, "Marry", "address", "faculty");   //insertData(statement, id, "name", "address", "faculty"); 
+       // deleteDataById(stmt, 1);                              //deleteDataById(statement, id);  
+        //updateAddressById(stmt, 1, "dug");                    //updateAddressById(statement, id, "address");
+        //updateFacultyById(stmt, 1, "dda");                    //updateFacultyById(statement, id, "faculty");
+        //updateNameById(stmt, 1 ,"name");                      //updateNameById(statement, id, "name");
+        //simpleQuery(stmt);                                    //show *
+        //simpleQueryObject(stmt);                              
         stmt.close();
         con.close();
 
@@ -69,7 +67,7 @@ public class StdRegis {
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()) {
             Student std = new Student();
-            std.setID(rs.getInt("id"));
+            std.setId(rs.getInt("id"));
             std.setName(rs.getString("name"));
             std.setAddress(rs.getString("address")); // change to address
             std.setFaculty(rs.getString("faculty"));
@@ -77,7 +75,7 @@ public class StdRegis {
         }
         rs.close();
         for (Student std : stdList) {
-            System.out.print(std.getID() + " ");
+            System.out.print(std.getId() + " ");
             System.out.print(std.getName() + " ");
             System.out.println(std.getAddress() + " ");
             System.out.println(std.getFaculty() + " ");

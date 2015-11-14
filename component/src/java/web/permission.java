@@ -7,24 +7,25 @@ package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.Report;
 import utilities.DatabaseDriver;
 import utilities.DatabaseHandler;
-import model.Report;
+import static web.report_servlet.count;
+import model.Account;
+import model.Student;
 
 /**
  *
- * @author KOKOKRUNCH
+ * @author VeRTeXR
  */
-public class report_servlet extends HttpServlet {
-    static int count = 0;
+public class permission extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,41 +39,30 @@ public class report_servlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        DatabaseDriver dbDriver = (DatabaseDriver) this.getServletContext().getAttribute("dbDriver");
-        /*DatabaseHandler dbHandler = (DatabaseHandler) session.getAttribute("dbHandler");
-        if (dbHandler == null) {
-            try {
-                dbHandler = new DatabaseHandler(dbDriver);
-                session.setAttribute("dbHandler", dbHandler);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AddEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(AddEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }*/
-        DatabaseHandler dbHandler = null;
-        try {
-            String stdid = (String)this.getServletContext().getAttribute("stdid");
+         PrintWriter out = response.getWriter();
+         DatabaseDriver dbDriver = (DatabaseDriver) this.getServletContext().getAttribute("dbDriver");
+         DatabaseHandler dbHandler = null;
+          try {
             dbHandler = new DatabaseHandler(dbDriver);
-            Report emp = new Report();
-            emp.setStdid(count++);
-            emp.setReport(request.getParameter("text_report"));
-            emp.setApprove(false);
-            String sql = "insert into REPORT (STDID, REPORT, APPROVE)" + 
-               " values (?,?,?)";
-         
-            int rowInserted;
-            try {
-                rowInserted = dbHandler.update(sql,stdid , emp.getReport(), emp.getApprove());
-            }
-            catch(SQLException ex ) {
-                rowInserted = 0;
+            Account mem = new Account();
+            mem.setUsername(request.getParameter("username"));
+            mem.setPassword(request.getParameter("password"));
+            String sql = "select * from ACCOUNT where ID = "+mem.getUsername()+" and PAASSWORD = "+mem.getPassword();
+            ResultSet rs; 
+            ArrayList<Account> act = null;
+            rs = dbHandler.query(sql);
+            boolean admin = true ;
+            while(rs.next())
+            {
+                 admin = rs.getBoolean("is_admin");if(admin)
+                request.getRequestDispatcher("adminpage.jsp").forward(request, response);
+           else
+                request.getRequestDispatcher("show_infomation.jsp").forward(request, response);
             }
             dbHandler.closeDatabase();
-            request.setAttribute("rowInserted", rowInserted);
-            request.getRequestDispatcher("result_report.jsp").forward(request, response);
+            this.getServletContext().setAttribute("stdid", request.getParameter("username"));
+            
+      
         } catch (ClassNotFoundException ex) {
         } catch (SQLException ex) {
         }

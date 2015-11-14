@@ -31,7 +31,6 @@
             Iterator<Report> itr = empList.iterator();
      %>
     <body>
-        out.print("hello");
         <h1>Create Member</h1>
         <form name="createMember" action="" method="POST">
             ID : <input type="text" name="createID" value="" size="10" />

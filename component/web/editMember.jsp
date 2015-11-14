@@ -28,11 +28,13 @@
             session.setAttribute("dbHandler", request.getParameter("id"));
             
         %>
-        <form action="confirmEdit" method="POST">
+        <form action="confirmEdit_" method="POST">
+            id : <input type="text" name="id" value="<%=request.getParameter("id")%>"/>
             name :<input type="text" name="name" value="<%=std.getName()%>" /><br>
             address :<input type="text" name="address" value="<%=std.getAddress()%>" /><br>
             faculty :<input type="text" name="faculty" value="<%=std.getFaculty()%>" /><br>
             <input type="submit" value="submit" name="submit" />
+            <input type="submit" value="delete" name="delete" />
         </form>
     </body>
 </html>

@@ -17,6 +17,20 @@ import utilities.DatabaseHandler;
  * @author VeRTeXR
  */
 public class StudentLogger {
+    public static int updateStudent(DatabaseHandler dbHandler, Student std)throws SQLException {
+        String sql = "update STUDENT set NAME=?, ADDRESS=? ,FACULTY=? where ID="+std.getId();
+        System.out.println(std.getId());
+        int rowUpdated;
+        try {
+            rowUpdated = dbHandler.update(sql, std.getName(), std.getAddress(), std.getFaculty());
+        }
+        catch (Exception ex ) {
+            System.out.println(ex);
+            rowUpdated = 0;
+        }
+        
+        return rowUpdated;
+    }
     
     public static ArrayList<Student> getStudentById(DatabaseHandler dbHandler,String id)throws SQLException {
         String sql = "select * from student WHERE ID = "+id;

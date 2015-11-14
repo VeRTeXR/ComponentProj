@@ -20,6 +20,10 @@
         <servlet-name>confirmEdit</servlet-name>
         <servlet-class>web.confirmEdit</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>confirmEdit_</servlet-name>
+        <servlet-class>web.confirmEdit_</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>student</servlet-name>
         <url-pattern>/student</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>confirmEdit</servlet-name>
         <url-pattern>/confirmEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>confirmEdit_</servlet-name>
+        <url-pattern>/confirmEdit_</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

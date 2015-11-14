@@ -9,14 +9,12 @@ import helperclasses.UpdatingRecord;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Student;
 import model.StudentLogger;
 import utilities.DatabaseDriver;
@@ -26,7 +24,7 @@ import utilities.DatabaseHandler;
  *
  * @author KOKOKRUNCH
  */
-public class confirmEdit_ extends HttpServlet {
+public class create extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,35 +47,25 @@ public class confirmEdit_ extends HttpServlet {
             dbHandler = new DatabaseHandler(dbDriver);
             int id = Integer.parseInt(request.getParameter("id"));
             Student std = new Student();
+            Account acc = new Account();
             std.setId(new Integer(request.getParameter("id")));
             std.setName(request.getParameter("name"));
             System.out.println(request.getParameter("name"));
             std.setAddress(request.getParameter("address"));
             std.setFaculty(request.getParameter("faculty"));
-            if(request.getParameter("submit")!=null){
-                synchronized(this.getServletContext()) {
-                    if (UpdatingRecord.isUpdating(this.getServletContext(), id)) {
-                        dbHandler.closeDatabase();
-                        request.getRequestDispatcher("notifylocked.jsp").forward(request, response);
-                    }
-               
-                    int rowUpdated = 0;
-                    rowUpdated = StudentLogger.updateStudent(dbHandler, std);
-                    System.out.println(rowUpdated);
+            acc.setPassword(request.getParameter("pwd"));
+            synchronized(this.getServletContext()) {
+                if (UpdatingRecord.isUpdating(this.getServletContext(), id)) {
+                    dbHandler.closeDatabase();
+                    request.getRequestDispatcher("notifylocked.jsp").forward(request, response);
                 }
-            }else{
-                synchronized(this.getServletContext()) {
-                    if (UpdatingRecord.isUpdating(this.getServletContext(), id)) {
-                        dbHandler.closeDatabase();
-                        request.getRequestDispatcher("notifylocked.jsp").forward(request, response);
-                    }
-                    int rowUpdated = 0;
-                    rowUpdated = StudentLogger.removeStudent(dbHandler, id);
-                    
-                    System.out.println(rowUpdated);
-                }
+
+                int rowUpdated = 0;
+                rowUpdated = StudentLogger.insertStudent(dbHandler, std,acc);
+                System.out.println(rowUpdated);
             }
         } catch (ClassNotFoundException | SQLException ex) {
+            
         }
     }
 

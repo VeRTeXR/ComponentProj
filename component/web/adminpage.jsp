@@ -32,16 +32,18 @@
      %>
     <body>
         <h1>Create Member</h1>
-        <form name="createMember" action="" method="POST">
-            ID : <input type="text" name="createID" value="" size="10" />
+        <form name="createMember" action="create" method="POST">
+            ID : <input type="text" name="id" value="" size="10" />
             <br>
-            Password : <input type="password" name="createPassword" value="" size="20" />
+            Password : <input type="password" name="pwd" value="" size="20" />
             <br>
-            Address : <input type="text" name="createAddress" value="" size="100" />
+            Name : <input type="text" name="name" value="" size="20" />
             <br>
-            Faculty : <input type="text" name="createFaculty" value="" size="20"/>
+            Address : <input type="text" name="address" value="" size="100" />
+            <br>
+            Faculty : <input type="text" name="faculty" value="" size="20"/>
             <br><br>
-            <input type="submit" name="createsubmit" value="Create" />
+            <input type="submit" name="submit" value="Create" />
         </form>
         <form name="edit" action="editMember.jsp" method="POST">
             <input type="text" name="id" value="" /><br>

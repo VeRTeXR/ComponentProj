@@ -24,6 +24,10 @@
         <servlet-name>confirmEdit_</servlet-name>
         <servlet-class>web.confirmEdit_</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>create</servlet-name>
+        <servlet-class>web.create</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>student</servlet-name>
         <url-pattern>/student</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>confirmEdit_</servlet-name>
         <url-pattern>/confirmEdit_</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>create</servlet-name>
+        <url-pattern>/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

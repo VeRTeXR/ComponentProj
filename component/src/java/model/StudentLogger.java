@@ -17,6 +17,39 @@ import utilities.DatabaseHandler;
  * @author VeRTeXR
  */
 public class StudentLogger {
+    public static int insertStudent(DatabaseHandler dbHandler, Student std,Account acc)throws SQLException {
+         String sql = "insert into ACCOUNT (id, password)" + 
+               " values (?,?)";
+         String sql2 = "insert into STUDENT (id, name, address, faculty)" + 
+               " values (?,?,?,?)";
+         
+         int rowInserted,rowInserted2;
+         try {
+             rowInserted = dbHandler.update(sql, std.getId() ,acc.getPassword());
+             rowInserted2 = dbHandler.update(sql2, std.getId() ,std.getName(),std.getAddress(),std.getFaculty());
+
+         }catch(SQLException ex) {
+             rowInserted = 0;
+             rowInserted2 = 0;
+         }
+         return rowInserted+rowInserted2;
+    } 
+    public static int removeStudent(DatabaseHandler dbHandler, int id) {
+         String sql ="delete from STUDENT where id = ?";
+         String sql2 ="delete from ACCOUNT where id = ?";
+         int rowDeleted,rowDeleted2;
+         try {
+            rowDeleted = dbHandler.update(sql, id);
+            rowDeleted2 = dbHandler.update(sql2, id);
+         }
+         catch (SQLException ex ) {
+             rowDeleted = 0;
+             rowDeleted2 = 0;
+             
+         }
+        return rowDeleted+rowDeleted2;
+    }
+    
     public static int updateStudent(DatabaseHandler dbHandler, Student std)throws SQLException {
         String sql = "update STUDENT set NAME=?, ADDRESS=? ,FACULTY=? where ID="+std.getId();
         System.out.println(std.getId());

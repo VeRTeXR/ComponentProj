@@ -3,7 +3,7 @@
     Created on : Nov 14, 2015, 3:13:23 PM
     Author     : KOKOKRUNCH
 --%>
-<%@page import="model.AccountS"%>
+<%@page import="model.StudentLogger"%>
 <%@page import="model.Student"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-     <jsp:useBean id="emp" class="model.AccountS" scope="request"/>
+     <jsp:useBean id="emp" class="model.Student" scope="request"/>
     <%
             DatabaseDriver dbDriver = (DatabaseDriver)this.getServletContext().getAttribute("dbDriver");
             /*DatabaseHandler dbHandler = (DatabaseHandler) session.getAttribute("dbHandler");
@@ -25,8 +25,8 @@
                 session.setAttribute("dbHandler", dbHandler);
             }*/
             DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
-            ArrayList<AccountS> empList = Student.getStudentById(dbHandler,request.getParameter("username"));
-            Iterator<AccountS> itr = empList.iterator();
+            ArrayList<Student> stdList = StudentLogger.getStudentById(dbHandler,request.getParameter("username"));
+            Iterator<Student> itr = stdList.iterator();
      %>
     <body>
         <h1>Student Information</h1>
@@ -42,7 +42,7 @@
          %>
          <br><br>
          <H1>Report</H1>
-         <form name="report" action="report_servlet" method="POST">
+         <form name="report" action="report_servlet?stdid="<%request.getParameter("username");%>  method="GET" >
              <textarea name="text_report" rows="5" cols="20">
              </textarea><br>
              <input type="submit" value="Submit" name="submit" />

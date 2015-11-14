@@ -64,7 +64,7 @@ public class report_servlet extends HttpServlet {
          
             int rowInserted;
             try {
-                rowInserted = dbHandler.update(sql, emp.getStdid(), emp.getReport(), emp.getApprove());
+                rowInserted = dbHandler.update(sql, request.getParameter("stdid"), emp.getReport(), emp.getApprove());
             }
             catch(SQLException ex ) {
                 rowInserted = 0;

@@ -6,7 +6,6 @@
 package stdregis;
 
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import model.Student;
 
 /**
  *
@@ -41,10 +41,10 @@ public class StdRegis {
          * String url= "jdbc:sqlserver://server[:port]:database="databaseName" //for MS SQL Server 
          * String url= "jdbc:oracle:thin:@server:port:databaseName" //for Oracle
          */
-        String url = "jdbc:derby://localhost:1527/regis";
+        String url = "jdbc:derby://localhost:1527/accounts";
         //String url="jdbc:mysql://localhost/employee";
-        String user = "app";
-        String passwd = "app";
+        String user = "root";
+        String passwd = "root";
         //String user = "sarun";
         //String passwd = "";
         Connection con = DriverManager.getConnection(url, user, passwd);
@@ -54,7 +54,7 @@ public class StdRegis {
         // insertData(stmt, 2, "Marry", 45678);
         //deleteDataById(stmt, 6);
         //updateSalaryById(stmt, 3, 5000.50);
-        insertDataPreparedStatement(con, 3, "Markus", 14578);
+        //insertDataPreparedStatement(con, 3, "Markus", 14578);
         //deleteDataPreparedStatementById(con, 5);
         //updateSalaryPreparedStatementById(con, 3, 6000.50);
         //simpleQuery(stmt);
@@ -71,25 +71,28 @@ public class StdRegis {
        ResultSet rs = stmt.executeQuery(sql);
        while(rs.next()) {
            Student std = new Student();
-           std.setId(rs.getInt("id"));
+           std.setID(rs.getInt("id"));
            std.setName(rs.getString("name"));
-           std.setSalary(rs.getDouble("salary"));
+           std.setAddress(rs.getString("address")); // change to address
+           std.setFaculty(rs.getString("faculty"));
            stdList.add(std);
        }
        rs.close();
-       for(Employee emp : employeeList) {
-           System.out.print(emp.getId() + " ");
-           System.out.print(emp.getName() + " ");
-           System.out.println(emp.getSalary() + " ");
+       for(Student std : stdList) {
+           System.out.print(std.getID() + " ");
+           System.out.print(std.getName() + " ");
+           System.out.println(std.getAddress() + " ");
+           System.out.println(std.getFaculty()+ " ");
        }
     }
     public static void simpleQuery(Statement stmt) throws SQLException {
-       String sql = "select * from employee order by id";
+       String sql = "select * from student order by id";
        ResultSet rs = stmt.executeQuery(sql);
        while(rs.next()) {
            System.out.print(rs.getInt("id") + " ");
            System.out.print(rs.getString("name") + " ");
-           System.out.println(rs.getDouble("salary"));
+           System.out.println(rs.getString("address"+" "));
+           System.out.println(rs.getString("faculty"+" "));
        }
        rs.close();
    }
@@ -97,14 +100,14 @@ public class StdRegis {
            double salary) throws SQLException {
        /*String sql = "insert into employee (id, name, salary)" +
                      " values (5, 'Mark', 12345)";*/
-        String sql = "insert into employee (id, name, salary)" +
-                     " values (" + id + "," + "'" + name + "'" + "," + salary + ")";
+        String sql = "insert into student (id, name, address, faculty)" +
+                     " values (" + id + "," + "'" + name + "'" + "," + address + ")";
         int result = stmt.executeUpdate(sql);
         //display result
         System.out.println("Insert " + result + " row");
    } 
    public static void deleteDataById(Statement stmt, int id) throws SQLException {
-       String sql = "delete from employee where id = " + id;
+       String sql = "delete from student where id = " + id;
        int result = stmt.executeUpdate(sql);
         //display result
         System.out.println("delete " + result + " row");
@@ -146,27 +149,10 @@ public class StdRegis {
         //display result
         System.out.println("update " + result + " row");
    }
-    
-    
-     public static void createStudent() {
-        Student std = new Student ();
-        std.setID();
-        std.setName();
-        std.setAddress();
-        std.setFaculty();
-        persist(std);
-    }
-    
-    public static void editStudent(id,std){
-    
-    } 
-    
-    public static void deleteStudent(id){
-        
-    }
+
 
     public static void persist(Object object) { //adding teh static bruhh
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DuhPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("stdRegisPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {

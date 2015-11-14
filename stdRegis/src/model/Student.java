@@ -27,7 +27,7 @@ public class Student {
         this.address = address;
     } 
     
-    public String getAdress() {
+    public String getAddress() {
         return address;
     }
     
@@ -39,11 +39,11 @@ public class Student {
         this.name = name;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 

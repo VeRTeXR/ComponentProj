@@ -1,6 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package model;
@@ -11,4 +10,41 @@ package model;
  */
 public class Student {
     
+    private int id;
+    private String name;
+    private String address;
+    private String faculty;
+
+    public void setFaculty (String faculty){
+        this.faculty = faculty;
+    }
+    
+    public String getFaculty () {
+        return faculty;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    } 
+    
+    public String getAdress() {
+        return address;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

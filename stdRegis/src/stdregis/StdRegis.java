@@ -51,14 +51,15 @@ public class StdRegis {
         //create statement
         Statement stmt = con.createStatement();
        // insertData(stmt, 1, "John", 12345);     //add data here or wot 
-        // insertData(stmt, 2, "Marry", 45678);
+      
+        //insertData(stmt, 1, "Marry", "address", "faculty");
         //deleteDataById(stmt, 6);
         //updateSalaryById(stmt, 3, 5000.50);
         //insertDataPreparedStatement(con, 3, "Markus", 14578);
         //deleteDataPreparedStatementById(con, 5);
         //updateSalaryPreparedStatementById(con, 3, 6000.50);
-        //simpleQuery(stmt);
-        simpleQueryObject(stmt);
+        simpleQuery(stmt);
+        //simpleQueryObject(stmt);
         //close connection
         stmt.close();
         con.close();
@@ -91,17 +92,17 @@ public class StdRegis {
        while(rs.next()) {
            System.out.print(rs.getInt("id") + " ");
            System.out.print(rs.getString("name") + " ");
-           System.out.println(rs.getString("address"+" "));
-           System.out.println(rs.getString("faculty"+" "));
+           System.out.println(rs.getString("address")+" ");
+           System.out.println(rs.getString("faculty")+" ");
        }
        rs.close();
    }
    public static void insertData(Statement stmt, int id, String name, 
-           double salary) throws SQLException {
+           String address, String faculty) throws SQLException {
        /*String sql = "insert into employee (id, name, salary)" +
                      " values (5, 'Mark', 12345)";*/
         String sql = "insert into student (id, name, address, faculty)" +
-                     " values (" + id + "," + "'" + name + "'" + "," + address + ")";
+                     " values (" + id + "," + "'" + name + "'" + "," + "'" + address + "'" + "," + "'" + faculty + "'" + ")";
         int result = stmt.executeUpdate(sql);
         //display result
         System.out.println("Insert " + result + " row");

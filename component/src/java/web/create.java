@@ -63,6 +63,8 @@ public class create extends HttpServlet {
                 int rowUpdated = 0;
                 rowUpdated = StudentLogger.insertStudent(dbHandler, std,acc);
                 System.out.println(rowUpdated);
+                request.setAttribute("rowInserted", rowUpdated);
+                request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             

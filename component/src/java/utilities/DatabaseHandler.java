@@ -22,8 +22,7 @@ public class DatabaseHandler {
        Class.forName(driver);
        connection = DriverManager.getConnection(url, user, passwd);
     }*/
-    public DatabaseHandler(DatabaseDriver dbDriver ) 
-            throws ClassNotFoundException, SQLException {
+    public DatabaseHandler(DatabaseDriver dbDriver)throws ClassNotFoundException, SQLException ,ClassCastException{
             connection = DriverManager.getConnection(dbDriver.getUrl(),
                 dbDriver.getUser(), dbDriver.getPasswd());
     }

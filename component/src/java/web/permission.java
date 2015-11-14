@@ -40,10 +40,10 @@ public class permission extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
-         DatabaseDriver dbDriver = (DatabaseDriver) this.getServletContext().getAttribute("dbDriver");
-         DatabaseHandler dbHandler = null;
+         DatabaseDriver dbDriver = (DatabaseDriver)this.getServletContext().getAttribute("dbDriver");
+         
           try {
-            dbHandler = new DatabaseHandler(dbDriver);
+            DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
             Account mem = new Account();
             mem.setUsername(request.getParameter("username"));
             mem.setPassword(request.getParameter("password"));
@@ -51,10 +51,11 @@ public class permission extends HttpServlet {
             ResultSet rs = dbHandler.query(sql);
             rs.next();
                if(rs.getBoolean("is_admin")){
-                    request.getRequestDispatcher("adminpage.jsp").forward(request, response);
+                   request.getRequestDispatcher("adminpage.jsp").forward(request, response);
+                    
                 }
                 else {
-                    request.getRequestDispatcher("show_infomation.jsp").forward(request, response);
+                   request.getRequestDispatcher("show_infomation.jsp").forward(request, response);
                 }
             
             dbHandler.closeDatabase();
@@ -63,6 +64,7 @@ public class permission extends HttpServlet {
       
         } catch (ClassNotFoundException ex) {
         } catch (SQLException ex) {
+        }catch (ClassCastException ex) {
         }
     }
 

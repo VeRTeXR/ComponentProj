@@ -64,6 +64,8 @@ public class confirmEdit_ extends HttpServlet {
                     int rowUpdated = 0;
                     rowUpdated = StudentLogger.updateStudent(dbHandler, std);
                     System.out.println(rowUpdated);
+                    request.setAttribute("rowUpdated", rowUpdated);
+                    request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
                 }
             }else{
                 synchronized(this.getServletContext()) {
@@ -72,9 +74,10 @@ public class confirmEdit_ extends HttpServlet {
                         request.getRequestDispatcher("notifylocked.jsp").forward(request, response);
                     }
                     int rowUpdated = 0;
-                    rowUpdated = StudentLogger.removeStudent(dbHandler, id);
-                    
+                    rowUpdated = StudentLogger.removeStudent(dbHandler, id);                    
                     System.out.println(rowUpdated);
+                    request.setAttribute("rowUpdated", rowUpdated);
+                    request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {

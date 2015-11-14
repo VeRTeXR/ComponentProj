@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package model;
@@ -12,24 +13,16 @@ package model;
  */
 
 public class Student  {
-    
+    //@Column(name = "ID")
     private Integer id;
-    //@Size(max = 40)
     //@Column(name = "NAME")
     private String name;
-    //@Size(max = 200)
     //@Column(name = "ADDRESS")
     private String address;
-    //@Size(max = 100)
     //@Column(name = "FACULTY")
     private String faculty;
-
-   /* public Students() {
-    }
-
-    public Students(Integer id) {
-        this.id = id;
-    }*/
+    //@Column(name = "USERNAME")
+    private String username;
 
     public Integer getId() {
         return id;
@@ -63,7 +56,15 @@ public class Student  {
         this.faculty = faculty;
     }
 
-   /* @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /*@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -73,10 +74,10 @@ public class Student  {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Students)) {
+        if (!(object instanceof Student)) {
             return false;
         }
-        Students other = (Students) object;
+        Student other = (Student) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -85,16 +86,7 @@ public class Student  {
 
     @Override
     public String toString() {
-        return "model.Students[ id=" + id + " ]";
+        return "model.Student[ id=" + id + " ]";
     }*/
-
-
-    public int getID() {
-        return id;
-    }
-
-    public void setID(int id) {
-        this.id = id;
-    }
-
+    
 }

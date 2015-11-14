@@ -3,6 +3,10 @@
   <persistence-unit name="stdRegisPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>model.Report</class>
+    <class>model.Admins</class>
+    <class>model.Students</class>
+    <class>model.Admin</class>
+    <class>model.Student</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/Regis"/>
       <property name="javax.persistence.jdbc.user" value="app"/>

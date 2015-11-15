@@ -32,6 +32,7 @@
                 
             }
             this.getServletContext().setAttribute("dbDriver", dbDriver);
+            
       }
       public void jspDestroy() {
           /*try {
@@ -45,11 +46,10 @@
     %>
     <body>
         <form name="student" action="permission" method="POST">
-            <input type="text" name="username" value="" /><br>
-            <input type="password" name="password" value="" /><br>
+            Username :<input type="text" name="username" value="" /><br>
+            Password  :<input type="password" name="password" value="" /><br>
             <input type="submit" value="Submit" name="submit" />
             <input type="reset" value="clear" />
         </form>
-        <a href="adminpage.jsp">Click</a>
     </body>
 </html>

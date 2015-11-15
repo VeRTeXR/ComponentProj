@@ -55,31 +55,27 @@ public class confirmEdit_ extends HttpServlet {
             std.setAddress(request.getParameter("address"));
             std.setFaculty(request.getParameter("faculty"));
             if(request.getParameter("submit")!=null){
-                synchronized(this.getServletContext()) {
-                    if (UpdatingRecord.isUpdating(this.getServletContext(), id)) {
-                        dbHandler.closeDatabase();
-                        request.getRequestDispatcher("notifylocked.jsp").forward(request, response);
-                    }
-               
                     int rowUpdated = 0;
                     rowUpdated = StudentLogger.updateStudent(dbHandler, std);
-                    System.out.println(rowUpdated);
-                    request.setAttribute("rowUpdated", rowUpdated);
-                    request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
-                }
-            }else{
-                synchronized(this.getServletContext()) {
-                    if (UpdatingRecord.isUpdating(this.getServletContext(), id)) {
-                        dbHandler.closeDatabase();
-                        request.getRequestDispatcher("notifylocked.jsp").forward(request, response);
+                    if(session.getAttribute("report")!= null){
+                        StudentLogger.removeReport(dbHandler, id);
                     }
-                    int rowUpdated = 0;
-                    rowUpdated = StudentLogger.removeStudent(dbHandler, id);                    
-                    System.out.println(rowUpdated);
                     request.setAttribute("rowUpdated", rowUpdated);
                     request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
-                }
+
+            }else{
+                    int rowUpdated = 0;
+                    rowUpdated = StudentLogger.removeStudent(dbHandler, id);
+                    if(session.getAttribute("report")!= null){
+                        StudentLogger.removeReport(dbHandler, id);  
+                    }
+                    request.setAttribute("rowUpdated", rowUpdated);
+                    request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
             }
+            synchronized(this.getServletContext()) {
+                UpdatingRecord.removeUpdated(this.getServletContext(), id);
+            }
+            
         } catch (ClassNotFoundException | SQLException ex) {
         }
     }

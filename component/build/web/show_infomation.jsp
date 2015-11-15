@@ -26,10 +26,11 @@
                 session.setAttribute("dbHandler", dbHandler);
             }*/
             DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
-            ArrayList<Student> stdList = StudentLogger.getStudentById(dbHandler,request.getParameter("username"));
+            ArrayList<Student> stdList = StudentLogger.getStudentById(dbHandler,(String)request.getSession().getAttribute("id"));
             Iterator<Student> itr = stdList.iterator();
      %>
     <body>
+        <a href='index.jsp'>Log out</a>
         <h1>Student Information</h1>
          <%
          while(itr.hasNext()) {

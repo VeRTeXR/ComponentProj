@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Report;
 import utilities.DatabaseDriver;
 import utilities.DatabaseHandler;
@@ -39,10 +40,12 @@ public class permission extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
-         DatabaseDriver dbDriver = (DatabaseDriver)this.getServletContext().getAttribute("dbDriver");
-         
-          try {
+        PrintWriter out = response.getWriter();
+        DatabaseDriver dbDriver = (DatabaseDriver)this.getServletContext().getAttribute("dbDriver");
+        //System.out.println(request.getSession().getAttribute("a"));
+        HttpSession session = request.getSession();
+        session.setAttribute("id", request.getParameter("username"));
+        try {
             DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
             Account mem = new Account();
             mem.setUsername(request.getParameter("username"));
@@ -50,22 +53,19 @@ public class permission extends HttpServlet {
             String sql = "select * from ACCOUNT where ID = "+mem.getUsername()+" and PASSWORD = "+"'"+mem.getPassword()+"'";
             ResultSet rs = dbHandler.query(sql);
             rs.next();
-               if(rs.getBoolean("is_admin")){
-                   request.getRequestDispatcher("adminpage.jsp").forward(request, response);
-                    
-                }
-                else {
-                   request.getRequestDispatcher("show_infomation.jsp").forward(request, response);
-                }
-            
-            dbHandler.closeDatabase();
-            this.getServletContext().setAttribute("stdid", request.getParameter("username"));
-            
-      
+            if(rs.getBoolean("is_admin")){
+                dbHandler.closeDatabase();
+                this.getServletContext().setAttribute("stdid", request.getParameter("username"));
+                request.getRequestDispatcher("adminpage.jsp").forward(request, response);
+            }
+            else {
+                dbHandler.closeDatabase();
+                this.getServletContext().setAttribute("stdid", request.getParameter("username"));
+                request.getRequestDispatcher("show_infomation.jsp").forward(request, response);
+            }
         } catch (ClassNotFoundException ex) {
         } catch (SQLException ex) {
-        }catch (ClassCastException ex) {
-        }
+        }catch (ClassCastException ex) { }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -13,6 +13,7 @@
     </head>
     <body>
         <h1><%=request.getAttribute("rowInserted") + " row is added " %> </h1>
-        <h1>done!</h1>
+        <h1>done!</h1><br>
+        <a href="show_infomation.jsp">Back to main Page</a>
     </body>
 </html>

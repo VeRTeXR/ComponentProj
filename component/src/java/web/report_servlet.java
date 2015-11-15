@@ -54,10 +54,9 @@ public class report_servlet extends HttpServlet {
         }*/
         DatabaseHandler dbHandler = null;
         try {
-            String stdid = (String)this.getServletContext().getAttribute("stdid");
+            String stdid = (String)request.getSession().getAttribute("id");
             dbHandler = new DatabaseHandler(dbDriver);
             Report emp = new Report();
-            emp.setStdid(count++);
             emp.setReport(request.getParameter("text_report"));
             emp.setApprove(false);
             String sql = "insert into REPORT (STDID, REPORT, APPROVE)" + 

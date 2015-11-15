@@ -59,7 +59,6 @@ public class create extends HttpServlet {
                     dbHandler.closeDatabase();
                     request.getRequestDispatcher("notifylocked.jsp").forward(request, response);
                 }
-
                 int rowUpdated = 0;
                 rowUpdated = StudentLogger.insertStudent(dbHandler, std,acc);
                 System.out.println(rowUpdated);

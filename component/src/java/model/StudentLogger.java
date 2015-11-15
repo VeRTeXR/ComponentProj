@@ -33,7 +33,19 @@ public class StudentLogger {
              rowInserted2 = 0;
          }
          return rowInserted+rowInserted2;
-    } 
+    }
+    public static int removeReport(DatabaseHandler dbHandler, int id) {
+         String sql ="delete from REPORT where stdid = ?";
+         int rowDeleted;
+         try {
+            rowDeleted = dbHandler.update(sql, id);
+         }
+         catch (SQLException ex ) {
+             rowDeleted = 0;
+             
+         }
+        return rowDeleted;
+    }
     public static int removeStudent(DatabaseHandler dbHandler, int id) {
          String sql ="delete from STUDENT where id = ?";
          String sql2 ="delete from ACCOUNT where id = ?";

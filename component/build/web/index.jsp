@@ -45,11 +45,14 @@
       } 
     %>
     <body>
+    <center>
+        <h1>Login</h1>
         <form name="student" action="permission" method="POST">
-            Username :<input type="text" name="username" value="" /><br>
-            Password  :<input type="password" name="password" value="" /><br>
+            Username  : <input type="text" name="username" value="" /><br><br>
+            Password  : <input type="password" name="password" value="" /><br><br>
             <input type="submit" value="Submit" name="submit" />
             <input type="reset" value="clear" />
         </form>
+        </center>
     </body>
 </html>

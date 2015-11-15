@@ -30,24 +30,25 @@
      %>
     <body>
         <a href='index.jsp'>Log out</a>
+    <center>
         <h1>Create Member</h1>
         <form name="createMember" action="create" method="POST">
-            ID : <input type="text" name="id" value="" size="10" />
-            <br>
+            ID       : <input type="text" name="id" value="" size="10" />
+            <br><br>
             Password : <input type="password" name="pwd" value="" size="20" />
-            <br>
-            Name : <input type="text" name="name" value="" size="20" />
-            <br>
-            Address : <input type="text" name="address" value="" size="100" />
-            <br>
-            Faculty : <input type="text" name="faculty" value="" size="20"/>
+            <br><br>
+            Name     : <input type="text" name="name" value="" size="20" />
+            <br><br>
+            Address  : <textarea name="address" rows="10" cols="40"></textarea>
+            <br><br>
+            Faculty  : <input type="text" name="faculty" value="" size="20"/>
             <br><br>
             <input type="submit" name="submit" value="Create" />
         </form>
         <br><br>
         <h1>Edit&Delete</h1>
         <form name="edit" action="editMember.jsp" method="POST">
-            <input type="text" name="id" value="" /><br>
+           ID  : <input type="text" name="id" value="" /><br><br>
             <input type="submit" value="submit" name="submit" />
         </form>
         <br><br><br>
@@ -67,5 +68,6 @@
                 }
             %>
         </table>
+        </center>
     </body>
 </html>

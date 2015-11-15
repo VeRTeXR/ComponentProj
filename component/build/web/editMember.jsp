@@ -19,6 +19,8 @@
         <title>Edit Member</title>
     </head>
     <body>
+    <center>
+        <h2>Edit and Delete your member</h2>
         <%
             DatabaseDriver dbDriver = (DatabaseDriver)this.getServletContext().getAttribute("dbDriver");
             DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
@@ -36,12 +38,13 @@
             }
         %>
         <form action="confirmEdit_" method="POST">
-            id : <input type="text" name="id" value="<%=request.getParameter("id")%>"/>
-            name :<input type="text" name="name" value="<%=std.getName()%>" /><br>
-            address :<input type="text" name="address" value="<%=std.getAddress()%>" /><br>
-            faculty :<input type="text" name="faculty" value="<%=std.getFaculty()%>" /><br>
+            ID : <input type="text" name="id" value="<%=request.getParameter("id")%>"/><br><br>
+            Name :<input type="text" name="name" value="<%=std.getName()%>" /><br><br>
+            Address :<textarea name="address" rows="10" cols="40"><%=std.getAddress()%></textarea><br><br>
+            Faculty :<input type="text" name="faculty" value="<%=std.getFaculty()%>" /><br><br>
             <input type="submit" value="submit" name="submit" />
             <input type="submit" value="delete" name="delete" />
         </form>
+    </center>
     </body>
 </html>

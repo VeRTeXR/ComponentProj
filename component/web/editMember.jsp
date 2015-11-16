@@ -23,6 +23,7 @@
             DatabaseDriver dbDriver = (DatabaseDriver)this.getServletContext().getAttribute("dbDriver");
             DatabaseHandler dbHandler = new DatabaseHandler(dbDriver);
             Student std = new Student();
+            System.out.println(request.getParameter("id"));
             synchronized(this.getServletContext()) {
                 if (UpdatingRecord.isUpdating(this.getServletContext(), Integer.parseInt(request.getParameter("id")))) {
                     dbHandler.closeDatabase();
@@ -42,6 +43,8 @@
             faculty :<input type="text" name="faculty" value="<%=std.getFaculty()%>" /><br>
             <input type="submit" value="submit" name="submit" />
             <input type="submit" value="delete" name="delete" />
+            <input type="submit" value="back" name="back" />
+
         </form>
     </body>
 </html>

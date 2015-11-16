@@ -26,7 +26,7 @@ import utilities.DatabaseHandler;
  *
  * @author KOKOKRUNCH
  */
-public class confirmEdit_ extends HttpServlet {
+public class remove extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,38 +45,14 @@ public class confirmEdit_ extends HttpServlet {
         DatabaseDriver dbDriver = (DatabaseDriver) this.getServletContext().getAttribute("dbDriver");
         DatabaseHandler dbHandler;
         
+        
         try {
             dbHandler = new DatabaseHandler(dbDriver);
-            int id = Integer.parseInt(request.getParameter("id"));
-            Student std = new Student();
-            std.setId(new Integer(request.getParameter("id")));
-            std.setName(request.getParameter("name"));
-            System.out.println(request.getParameter("name"));
-            std.setAddress(request.getParameter("address"));
-            std.setFaculty(request.getParameter("faculty"));
-            if(request.getParameter("submit")!=null){
-                    int rowUpdated = 0;
-                    rowUpdated = StudentLogger.updateStudent(dbHandler, std);
-                    if(session.getAttribute("report")!= null){
-                        StudentLogger.removeReport(dbHandler, id);
-                    }
-                    request.setAttribute("rowUpdated", rowUpdated);
-                    request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
-
-            }else if(request.getParameter("delete")!=null){
-                    int rowUpdated = 0;
-                    rowUpdated = StudentLogger.removeStudent(dbHandler, id);
-                    if(session.getAttribute("report")!= null){
-                        StudentLogger.removeReport(dbHandler, id);  
-                    }
-                    request.setAttribute("rowUpdated", rowUpdated);
-                    request.getRequestDispatcher("CreateResult.jsp").forward(request, response);
-            }
-            else{
-                synchronized(this.getServletContext()) {
+            int id = Integer.parseInt((String)session.getAttribute("id"));
+            synchronized(this.getServletContext()) {
                 UpdatingRecord.removeUpdated(this.getServletContext(), id);
-                }
             }
+            request.getRequestDispatcher("adminpage.jsp").forward(request, response);
             
         } catch (ClassNotFoundException | SQLException ex) {
         }
